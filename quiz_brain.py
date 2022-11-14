@@ -2,6 +2,7 @@ import html
 class QuizBrain:
 
     def __init__(self, q_list):
+        self.is_right = bool
         self.question_number = 0
         self.score = 0
         self.question_list = q_list
@@ -18,5 +19,8 @@ class QuizBrain:
     def check_answer(self, players_decision):
         correct_answer = self.current_question.answer
         if correct_answer == players_decision:
+            self.is_right = True
             self.score += 1
+        else:
+            self.is_right = False
         self.question_number += 1

@@ -1,6 +1,8 @@
 from tkinter import *
 from quiz_brain import QuizBrain
+
 THEME_COLOR = "#375362"
+
 
 class QuizInterface:
 
@@ -46,10 +48,24 @@ class QuizInterface:
         if self.quiz.still_has_questions():
             self.quiz.check_answer(players_decision="True")
             self.score_label.config(text=f"Score: {self.quiz.score}/{self.quiz.question_number}")
+            self.is_right_highlight()
+            self.window.after(1000, func=self.color_back)
             self.get_next_question()
 
     def false_button(self):
         if self.quiz.still_has_questions():
             self.quiz.check_answer(players_decision="False")
             self.score_label.config(text=f"Score: {self.quiz.score}/{self.quiz.question_number}")
+            self.is_right_highlight()
+            self.window.after(1000, func=self.color_back)
             self.get_next_question()
+
+    def color_back(self):
+        self.canvas.config(bg="white")
+
+    def is_right_highlight(self):
+        if self.quiz.is_right:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(1000, func=self.color_back)
